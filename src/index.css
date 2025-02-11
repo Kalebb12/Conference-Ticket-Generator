@@ -1,19 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Road+Rage&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
 :root {
-  font-family:"Roboto", serif;
+  font-family: "Roboto", serif;
   line-height: 1.5;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  background: linear-gradient(0deg, #02191d, #02191d),
+    radial-gradient(
+      52.52% 32.71% at 50% 97.66%,
+      rgba(36, 160, 181, 0.2) 0%,
+      rgba(36, 160, 181, 0) 100%
+    );
+
+  color: white;
+  --green-ui: #24a0b5;
+  --progress-dark: #0e464f;
+
+  --shadow-dark: #00000033;
 }
 
 a {
   text-decoration: inherit;
   text-decoration: none;
 }
+
+nav > a {
+  color: #b3b3b3;
+}
+
+nav > a.active {
+  color: white;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
 /* a:hover {
 } */
+
+.border-line {
+  border: 1px solid #197686;
+  backdrop-filter: blur(4px);
+}
+
+progress {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+progress::-webkit-progress-bar {
+  border-radius: 5px;
+  overflow: hidden;
+  background-color: var(--progress-dark);
+}
+
+progress::-webkit-progress-value {
+  background-color: var(--green-ui);
+  transition: width 0.3s ease;
+}
+
+button:not(:disabled):active {
+  scale: 0.98;
+}
+
+#banner {
+  background: linear-gradient(
+      0deg,
+      rgba(10, 12, 17, 0.1),
+      rgba(10, 12, 17, 0.1)
+    ),
+    radial-gradient(
+        103.64% 57.39% at 14.02% 32.06%,
+        rgba(36, 160, 181, 0.2) 0%,
+        rgba(36, 160, 181, 0) 100%
+      )
+      /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
+
+  border-width: 0px 2px 2px 2px;
+
+  border-style: solid;
+
+  border-color: #07373f;
+
+  backdrop-filter: blur(14px);
+}
+
+/* Remove backdrop-filter for smaller screens */
+@media (max-width: 1190px) {
+  .border-line {
+    backdrop-filter: none;
+  }
+
+  #banner {
+    backdrop-filter: none;
+  }
+}
+
+#road-rage{
+  font-family:'Road rage',serif;
+}
