@@ -13,8 +13,7 @@ const TicketForm = () => {
 
   const CLOUDINARY_UPLOAD_URL =
     "https://api.cloudinary.com/v1_1/dhrhpd7a5/image/upload";
-  const CLOUDINARY_UPLOAD_PRESET = import.meta.env.PRESET;
-  console.log(import.meta.env.VITE_CLOUDINARY_PRESET)
+  const CLOUDINARY_UPLOAD_PRESET = import.meta.env.VITE_CLOUDINARY_PRESET;
 
   const clear = (e) => {
     e.preventDefault();
