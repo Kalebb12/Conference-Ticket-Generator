@@ -1,4 +1,4 @@
-import TicketInfo from "../components/ticketInfo";
+import TicketInfo from "../components/TicketInfo";
 
 const StepThree = ({control ,ticketRef}) => {
   return (
