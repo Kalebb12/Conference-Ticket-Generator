@@ -1,20 +1,20 @@
 import React from 'react';
 import { Controller } from "react-hook-form";
 
-const StepOne = ({ control, errors, register }) => {
+const StepOne = ({ control, errors, register ,formValues}) => {
   const ticketOptions = [
     {
-      type: "Regular Access",
+      type: "Regular access",
       total: "20",
       price: "Free",
     },
     {
-      type: "Vip",
+      type: "Vip access",
       total: "20",
       price: "$50",
     },
     {
-      type: "Vvip",
+      type: "Vvip access",
       total: "20",
       price: "$150",
     },
@@ -45,24 +45,23 @@ const StepOne = ({ control, errors, register }) => {
             <Controller
               name="ticketTypes"
               control={control}
-              defaultValue="Regular Access"
               render={({ field }) => (
                 <>
                   {ticketOptions.map((option) => (
                     <button
                       type="button"
                       key={option.type}
-                      className={`items-start flex w-full gap-2 p-2 rounded-xl ${
+                      className={`items-start flex flex-col w-full gap-3 p-3 rounded-xl ${
                         field.value === option.type ? "bg-[#197686]" : "bg-[#07373F]"
                       }`}
                       onClick={() => field.onChange(option.type)}
                     >
-                      <div className="flex flex-col items-start gap-1 grow">
-                        <span>{option.type}</span>
-                        <span>{option.total} left!</span>
-                      </div>
-                      <div className="font-semibold text-xl bg-[#0E464F] w-20 p-2 text-center border border-[#2BA4B9] rounded-lg">
+                      <div className="font-semibold text-xl">
                         {option.price}
+                      </div>
+                      <div className="flex flex-col items-start grow">
+                        <span className='uppercase'>{option.type}</span>
+                        <span className='text-sm'>{option.total} / 52</span>
                       </div>
                     </button>
                   ))}
@@ -79,7 +78,6 @@ const StepOne = ({ control, errors, register }) => {
         <span> Number of Tickets</span>
         <select
           name="amount"
-          defaultValue={1}
           {...register("amount")}
           className="grow outline-none border border-[#07373F] rounded-xl p-3"
         >

@@ -1,26 +1,17 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import FormHeader from "../components/FormHeader";
 import Button from "../components/Button";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import StepOne from "./StepOne";
 import StepTwo from "./StepTwo";
+import toast from "react-hot-toast";
+import StepThree from "./StepThree";
+import { handleDownload } from "../utils/handleDownload";
 
 const TicketForm = () => {
-  const [step, setStep] = useState(0);
-  const [uploading, setUploading] = useState(false);
-
-  const CLOUDINARY_UPLOAD_URL =
-    "https://api.cloudinary.com/v1_1/dhrhpd7a5/image/upload";
-  const CLOUDINARY_UPLOAD_PRESET = import.meta.env.VITE_CLOUDINARY_PRESET;
-
-  const clear = (e) => {
-    e.preventDefault();
-    setStep(0);
-    reset();
-  };
-
+  const ticketRef = useRef(null);
   const stepSchemas = [
     yup.object().shape({
       ticketTypes: yup.string().required("Select a contact method"),
@@ -32,8 +23,9 @@ const TicketForm = () => {
       email: yup.string().email().required(),
       about: yup.string(),
     }),
-    yup.object().shape({}),
   ];
+
+  const [step, setStep] = useState(0);
 
   const {
     register,
@@ -42,49 +34,50 @@ const TicketForm = () => {
     reset,
     trigger,
     control,
+    watch,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(stepSchemas[step]),
     mode: "onTouched",
     defaultValues: {
-      ticketTypes: "Regular Access",
-      amount: "1",
+      ticketTypes: "Regular access",
+      amount: 1,
       image: "",
     },
   });
 
-  const uploadToCloudinary = async (file) => {
-    setUploading(true);
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
-
-    try {
-      const response = await fetch(CLOUDINARY_UPLOAD_URL, {
-        method: "POST",
-        body: formData,
+  useEffect(() => {
+    const savedData = localStorage.getItem("formData");
+    if (savedData) {
+      const parsedData = JSON.parse(savedData);
+      Object.keys(parsedData).forEach((key) => {
+        setValue(key, parsedData[key]); // Set each field with stored data
       });
-      const data = await response.json();
-      setUploading(false);
-
-      if (data.secure_url) {
-        setValue("image", data.secure_url, { shouldValidate: true });
-        trigger("image");
-        alert("Image successfully uploaded👌👌");
-      }
-    } catch (error) {
-      setUploading(false);
-      alert("Cloudinary Upload Error:🤦🤦");
-      console.error("Cloudinary Upload Error:", error);
     }
+  }, [setValue]);
+
+  useEffect(() => {
+    const subscription = watch((formValues) => {
+      localStorage.setItem("formData", JSON.stringify(formValues));
+    });
+
+    return () => subscription.unsubscribe();
+  }, [watch]);
+
+  const clear = (e) => {
+    e.preventDefault();
+    setStep(0);
+    reset();
   };
+
+  
 
   const onSubmit = (data) => {
     if (step < stepSchemas.length - 1) {
       setStep(step + 1);
     } else {
-      alert("Form submitted successfully! 🎉");
-      console.log("Final Data:", data);
+      toast.success("Form submitted successfully! 🎉");
+      setStep(2);
     }
   };
 
@@ -103,29 +96,39 @@ const TicketForm = () => {
             control={control}
             errors={errors}
             register={register}
-            uploadToCloudinary={uploadToCloudinary}
-            uploading={uploading}
           />
         )}
-        {step === 2 && (
-            <div className="flex flex-col gap-8">
-              <div className="space-y-4 text-center">
-                <h1 className="text-[32px]">Your Ticket is Booked!</h1>
-                <p>You can download or Check your email for a copy</p>
-              </div>
-              <div className="relative grow">
-                <img src="/ticket.png" alt="ticket" className="mx-auto" />
-              </div>
-            </div>
+        {step === 2 && <StepThree control={control} ticketRef={ticketRef} />}
+        {step < 2 ? (
+          <div className="flex items-center flex-col gap-4 md:flex-row md:ap-[32px] md:px-12 w-full">
+            <Button
+              type="outline"
+              className="grow w-full justify-center"
+              onClick={clear}
+            >
+              Cancel
+            </Button>
+            <Button className="grow w-full justify-center">
+              {step < stepSchemas.length - 1 ? "Next" : "Submit"}
+            </Button>
+          </div>
+        ) : (
+          <div className="flex items-center flex-col gap-4 md:flex-row md:ap-[32px] md:px-12 w-full">
+            <Button
+              type="outline"
+              className="grow w-full justify-center"
+              onClick={clear}
+            >
+              Book Another Ticket
+            </Button>
+            <Button
+              className="grow w-full justify-center"
+              onClick={(e) => handleDownload(e, ticketRef)}
+            >
+              Download Ticket
+            </Button>
+          </div>
         )}
-        <div className="flex items-center flex-col gap-4 md:flex-row md:ap-[32px] md:px-12 w-full">
-          <Button type="outline" className="grow w-full justify-center" onClick={clear}>
-            Cancel
-          </Button>
-          <Button className="grow w-full justify-center">
-            {step < stepSchemas.length - 1 ? "Next" : "Submit"}
-          </Button>
-        </div>
       </form>
     </div>
   );
