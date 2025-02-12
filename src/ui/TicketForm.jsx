@@ -81,6 +81,8 @@ const TicketForm = () => {
     }
   };
 
+  
+
   return (
     <div className="border-line text-[#fafafa] w-full md:w-[700px] bg-[#041E23;] mx-auto rounded-4xl md:rounded-[40px] p-6 md:p-12 flex flex-col gap-8">
       <FormHeader index={step + 1} steps={3} />
@@ -94,8 +96,10 @@ const TicketForm = () => {
         {step === 1 && (
           <StepTwo
             control={control}
+            setValue={setValue}
             errors={errors}
             register={register}
+            trigger={trigger}
           />
         )}
         {step === 2 && <StepThree control={control} ticketRef={ticketRef} />}

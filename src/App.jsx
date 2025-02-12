@@ -7,7 +7,7 @@ function App() {
     <>
     <Toaster/>
       <Navbar />
-      <main className="md:p-0 p-5">
+      <main className="md:p-0 sm:p-5 p-2">
         <TicketForm />
       </main>
     </>

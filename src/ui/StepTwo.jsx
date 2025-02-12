@@ -6,9 +6,12 @@ import { uploadToCloudinary } from "../utils/uploadToCloudinary";
 const StepTwo = ({
   control,
   errors,
+  setValue,
   register,
+  trigger
 }) => {
   const [uploading, setUploading] = useState(false);
+
   return (
     <>
       <div id="banner" className="p-6 rounded-3xl grow flex flex-col gap-8">
@@ -22,7 +25,7 @@ const StepTwo = ({
               onDrop={(acceptedFiles) => {
                 const file = acceptedFiles[0];
                 if (file) {
-                  uploadToCloudinary(file,setUploading);
+                  uploadToCloudinary(file,setUploading,setValue , trigger);
                 }
               }}
             >

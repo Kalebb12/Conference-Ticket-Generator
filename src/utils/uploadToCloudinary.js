@@ -4,7 +4,7 @@ const CLOUDINARY_UPLOAD_URL = `https://api.cloudinary.com/v1_1/${
 }/image/upload`;
 const CLOUDINARY_UPLOAD_PRESET = import.meta.env.VITE_CLOUDINARY_PRESET;
 
-export const uploadToCloudinary = async (file, setUploading) => {
+export const uploadToCloudinary = async (file, setUploading ,setValue,trigger) => {
   setUploading(true);
   const formData = new FormData();
   formData.append("file", file);
