@@ -34,7 +34,7 @@ const TicketInfo = ({ image, name, email, type, amount, about }) => {
           <div className="grid grid-cols-2 border-b border-[#12464E]">
             <div className="flex-col flex border-r border-[#12464E] p-1 gap-1">
               <span className="text-[10px]">Ticket Type</span>
-              <span className="text-[10px] truncate">{type}</span>
+              <span className="text-[10px] uppercase truncate">{type}</span>
             </div>
             <div className="flex-col flex p-1 gap-1">
               <span className="text-[10px]">Ticket for</span>
@@ -44,7 +44,7 @@ const TicketInfo = ({ image, name, email, type, amount, about }) => {
 
           <div className="w- flex flex-col p-2 gap-1">
             <span className="text-[10px]">About</span>
-            <div className="w-[208px] h-[30px] overflow-ellipsis truncate">
+            <div className="text-[10px] w-[208px] h-[30px] overflow-ellipsis truncate">
               {about}
             </div>
           </div>
