@@ -25,7 +25,11 @@ const TicketForm = () => {
     }),
   ];
 
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState( ()=>{return parseInt(localStorage.getItem("formStep")) || 0});
+
+  useEffect(() => {
+    localStorage.setItem("formStep", step);
+  }, [step]);
 
   const {
     register,

@@ -81,7 +81,7 @@ const StepTwo = ({
         {errors.email && <p className="text-red-500">{errors.email.message}</p>}
       </div>
       <div className="flex grow gap-2 flex-col">
-        <span>About this project</span>
+        <span>Special request?</span>
         <textarea
           name="about"
           {...register("about")}

@@ -11,7 +11,7 @@ const StepThree = ({control ,ticketRef}) => {
           </p>
         </div>
         <div className="relative grow" ref={ticketRef}>
-          <img src="/ticket.svg" draggable={false} alt="ticket" className="mx-auto" />
+          <img src="/ticket.svg" draggable={false} alt="ticket" className="mx-auto h-[600px]" />
           <TicketInfo
             name={control._formValues.name}
             image={control._formValues.image}

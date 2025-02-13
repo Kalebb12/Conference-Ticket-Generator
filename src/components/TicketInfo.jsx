@@ -43,7 +43,7 @@ const TicketInfo = ({ image, name, email, type, amount, about }) => {
           </div>
 
           <div className="w- flex flex-col p-2 gap-1">
-            <span className="text-[10px]">About</span>
+            <span className="text-[10px]">Special Reguest?</span>
             <div className="text-[10px] w-[208px] h-[30px] overflow-ellipsis truncate">
               {about}
             </div>
