@@ -45,7 +45,8 @@ A **React-based multi-step ticket booking system** with form validation, Cloudin
    ```
 
 ## 📸 Screenshots
-_(Add relevant screenshots of your project UI here)_
+_(![image](https://github.com/user-attachments/assets/bb0ac7de-123c-427d-b902-257227bd1fd1)
+)_
 
 ## 📜 Usage
 1. Select a **ticket type**
@@ -64,5 +65,5 @@ Pull requests are welcome! Open an issue for suggestions or improvements.
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
-🚀 **Developed by [Your Name](https://github.com/kalebb12)**
+🚀 **Developed by [Caleb](https://github.com/kalebb12)**
 
