@@ -61,9 +61,6 @@ _(![image](https://github.com/user-attachments/assets/bb0ac7de-123c-427d-b902-25
 ## 🤝 Contributing
 Pull requests are welcome! Open an issue for suggestions or improvements.
 
-## 📄 License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ---
 🚀 **Developed by [Caleb](https://github.com/kalebb12)**
 
